@@ -30,9 +30,8 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 // redirect user/guest ke link original via shortlink
-Route::get('/(:any)', [LinkController::class, 'redirect']);
+Route::get('/{link}', [LinkController::class, 'redirect']);
 
 Route::get('/test', function () {
-    // return App::make('url')->to('/');
     return auth()->user();
 });

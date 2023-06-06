@@ -43,7 +43,7 @@
                                 <td class="text-center">
 
                                     {{-- go to link --}}
-                                    <a href="{{ $link->short }}" class="btn btn-sm btn-success">
+                                    <a href="/{{ $link->short }}" class="btn btn-sm btn-success">
                                         Go
                                     </a>
 
