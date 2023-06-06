@@ -10,13 +10,17 @@ class LinkController extends Controller
 {
     function index()
     {
+        // $listLink = Link::where('user_id', auth()->user()->id)->get();
+
+        $listLink = Link::all();
+
         $pageData = [
             "title" => "Shortlink baru",
-            "listLink" =>
+            "listLink" => $listLink,
 
         ];
 
-        return view('link.create', $pageData);
+        return view('link.index', $pageData);
     }
 
     function create()
