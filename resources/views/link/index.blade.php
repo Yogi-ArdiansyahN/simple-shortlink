@@ -23,7 +23,7 @@
                         <th>#</th>
                         <th>ID</th>
                         <th>Short link</th>
-                        <th>Link original</th>
+                        {{-- <th>Link original</th> --}}
                         <th class="text-center">Opsi</th>
                     </tr>
                 </thead>
@@ -39,7 +39,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $link->id }}</td>
                                 <td>{{ $link->short }}</td>
-                                <td>{{ $link->original }}</td>
+                                {{-- <td>{{ $link->original }}</td> --}}
                                 <td class="text-center">
 
                                     {{-- go to link --}}
@@ -47,10 +47,14 @@
                                         Go
                                     </a>
 
+                                    {{-- copy ke clipboard --}}
+                                    <button class="btn btn-sm btn-dark btnCopy" data-shortlink="{{ $link->short }}">
+                                        <i class="bi bi-clipboard-fill"></i>
+                                    </button>
+
                                     {{-- lihat detail --}}
                                     <a href="/link/{{ $link->id }}" class="btn btn-sm btn-primary">
                                         <i class="bi bi-eye-fill"></i>
-
                                     </a>
 
                                     {{-- edit --}}
@@ -77,6 +81,22 @@
             </table>
         </div>
     </div>
+
+
+    <script>
+        $(document).ready(function() {
+            const baseUrl = "{!! $baseUrl !!}"
+            const btnCopy = $(".btnCopy")
+
+            $(btnCopy).click(function() {
+                let shortLink = $(this).data('shortlink');
+                shortLink = `${baseUrl}/${shortLink}`
+                navigator.clipboard.writeText(shortLink);
+                alert('Shortlink berhasil di copy!')
+            })
+
+        })
+    </script>
 
 
 @endsection

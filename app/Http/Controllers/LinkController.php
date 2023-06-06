@@ -11,13 +11,15 @@ class LinkController extends Controller
 {
     function index()
     {
-        // $listLink = Link::where('user_id', auth()->user()->id)->get();
+        // $listLink = Link::whe('user_id', auth()->user()->id)->get();
 
         $listLink = Link::all();
+        $baseUrl = App::make('url')->to('/');
 
         $pageData = [
             "title" => "Shortlink",
             "listLink" => $listLink,
+            "baseUrl" => $baseUrl,
 
         ];
 
