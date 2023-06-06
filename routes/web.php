@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LinkController;
 
+use App\Http\Controllers\AuthController;
+
+
 // Route::group(['middleware' => 'auth'], function () {
 Route::get('/', [LinkController::class, 'index']);
 
