@@ -6,14 +6,18 @@ use App\Http\Controllers\LinkController;
 use App\Http\Controllers\AuthController;
 
 
+
+// redirect user/guest ke link original via shortlink
+
+
 // Route::group(['middleware' => 'auth'], function () {
 Route::get('/', [LinkController::class, 'index']);
 
 Route::prefix('link')->group(function () {
     Route::get('/', [LinkController::class, 'index']);
-    Route::get('/{link}', [LinkController::class, 'show']);
     Route::get('create', [LinkController::class, 'create']);
     Route::get('edit', [LinkController::class, 'edit']);
+    Route::get('/{link}', [LinkController::class, 'show']);
 
     Route::post('/', [LinkController::class, 'store']);
     Route::put('/{link}', [LinkController::class, 'update']);
@@ -33,9 +37,10 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/daftar', [AuthController::class, 'authRegister']);
 });
 
-// redirect user/guest ke link original via shortlink
-Route::get('/{link}', [LinkController::class, 'redirect']);
+
 
 Route::get('/test', function () {
     return auth()->user();
 });
+
+Route::get('/{shortLink}', [LinkController::class, 'redirect']);

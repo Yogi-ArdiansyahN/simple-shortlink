@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Redirect;
 
 class LinkController extends Controller
 {
@@ -54,8 +55,15 @@ class LinkController extends Controller
             return "Gagal buat link baru";
         }
 
-        return "Berhasil buat link";
-
         return redirect('/link');
+    }
+
+    function redirect($shortLink)
+    {
+        $link = Link::where('short', $shortLink)->first();
+
+        $originalLink = $link->original;
+
+        return redirect()->away($originalLink);
     }
 }
