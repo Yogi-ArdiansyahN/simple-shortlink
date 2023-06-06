@@ -10,7 +10,13 @@ class LinkController extends Controller
 {
     function index()
     {
-        return 'index';
+        $pageData = [
+            "title" => "Shortlink baru",
+            "listLink" =>
+
+        ];
+
+        return view('link.create', $pageData);
     }
 
     function create()
@@ -28,16 +34,21 @@ class LinkController extends Controller
 
     function store(Request $request)
     {
+        // $userId = auth()->user()->id;
+        $userId = 1;
+
+
         $linkBaru = $request->validate([
             'original' => 'required|unique:links',
             'short' => 'required|unique:links',
         ]);
+        $linkBaru['user_id'] = $userId;
 
-        // $insert = Link::create($linkBaru);
+        $insert = Link::create($linkBaru);
 
-        // if (!$insert) {
-        //     return "Gagal buat link baru";
-        // }
+        if (!$insert) {
+            return "Gagal buat link baru";
+        }
 
         return "Berhasil buat link";
 
