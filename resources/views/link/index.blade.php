@@ -48,7 +48,7 @@
                                     </a>
 
                                     {{-- lihat detail --}}
-                                    <a href="link/{{ $link->id }}" class="btn btn-sm btn-primary">
+                                    <a href="/link/{{ $link->id }}" class="btn btn-sm btn-primary">
                                         <i class="bi bi-eye-fill"></i>
 
                                     </a>

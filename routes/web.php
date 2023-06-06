@@ -11,6 +11,7 @@ Route::get('/', [LinkController::class, 'index']);
 
 Route::prefix('link')->group(function () {
     Route::get('/', [LinkController::class, 'index']);
+    Route::get('/{link}', [LinkController::class, 'show']);
     Route::get('create', [LinkController::class, 'create']);
     Route::get('edit', [LinkController::class, 'edit']);
 
