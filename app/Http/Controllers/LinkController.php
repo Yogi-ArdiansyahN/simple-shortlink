@@ -58,4 +58,49 @@ class LinkController extends Controller
 
         return redirect('/link');
     }
+
+    function edit($link)
+    {
+        $baseUrl = App::make('url')->to('/');
+        $pageData = [
+            'title' => "Edit Link",
+            'link' => Link::find($link),
+            "baseUrl" => $baseUrl,
+        ];
+        return view('link.edit', $pageData);
+    }
+
+    // function updateLink(Request $request, $link)
+    // {
+    //     $validate = $request->validate([
+    //         'original' => 'unique:link',
+    //         'short' => 'unique:link'
+    //     ]);
+
+    //     if (!$validate) {
+    //         return redirect('/link');
+    //     } else {
+    //         Link::where('id', $link)->update($validate);
+    //         return redirect('/link')->with('success', 'Link Berhasil Di Edit');
+    //     }
+    // }
+
+    function show($link)
+    {
+        $link = Link::find($link);
+
+        $pageData = [
+            "title" => "Detail Link",
+            "link" => $link,
+
+        ];
+        // dd($listLink);
+        return view('link.show', $pageData);
+    }
+
+    function destroyLink($link)
+    {
+        Link::destroy($link);
+        return back();
+    }
 }
