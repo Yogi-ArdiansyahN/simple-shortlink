@@ -15,7 +15,7 @@ class LinkController extends Controller
         $listLink = Link::all();
 
         $pageData = [
-            "title" => "Shortlink baru",
+            "title" => "Shortlink",
             "listLink" => $listLink,
 
         ];

@@ -5,10 +5,10 @@
 @extends('layout.main')
 @section('content')
 
-    <div class="mx-auto col-8">
+    <div class="mx-auto col-md-8">
         <div class="d-flex justify-content-between align-items-center my-3">
             <span class="fw-bold">
-                <h1>Daftar shortlink</h1>
+                <h1>{{ $title }}</h1>
             </span>
             <span>
                 <a href="/link/create" class="btn btn-success btn-sm">+ Shortlink baru</a>

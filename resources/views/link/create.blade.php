@@ -1,11 +1,19 @@
 @extends('layout.main')
 
 @section('content')
-    <div class="card mx-auto col-4">
-        <div class="card-header">
-            Buat shorlink baru
+    <div class="mx-auto col-md-8">
+        <div class="d-flex justify-content-between align-items-center my-3">
+            <span class="fw-bold">
+                <h1>{{ $title }}</h1>
+            </span>
+
+            <span class="fw-bold">
+                @include('component.backButton')
+            </span>
+
         </div>
-        <div class="card-body">
+
+        <div class="card mx-auto p-3">
             <form action="/link" method="post">
                 @csrf
 
@@ -26,6 +34,7 @@
             </form>
         </div>
     </div>
+
 
     <script>
         $(document).ready(function() {
