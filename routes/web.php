@@ -1,22 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LinkController;
 
-Route::group(['middleware' => 'auth'], function () {
+// Route::group(['middleware' => 'auth'], function () {
+Route::get('/', [LinkController::class, 'index']);
+
+Route::prefix('link')->group(function () {
     Route::get('/', [LinkController::class, 'index']);
+    Route::get('create', [LinkController::class, 'create']);
+    Route::get('edit', [LinkController::class, 'edit']);
 
-    Route::prefix('link')->group(function () {
-        Route::get('/', [LinkController::class, 'index']);
-        Route::get('create', [LinkController::class, 'create']);
-        Route::get('edit', [LinkController::class, 'edit']);
-
-        Route::post('/', [LinkController::class, 'store']);
-        Route::put('/{link}', [LinkController::class, 'update']);
-        Route::delete('/{link}', [LinkController::class, 'delete']);
-    });
-
-    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::post('/', [LinkController::class, 'store']);
+    Route::put('/{link}', [LinkController::class, 'update']);
+    Route::delete('/{link}', [LinkController::class, 'delete']);
 });
+
+Route::post('/logout', [LoginController::class, 'logout']);
+// });
 
 
 
@@ -29,9 +30,8 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 // redirect user/guest ke link original via shortlink
-Route::get('/(:any)', [LinkController::class, 'redirect']);
+Route::get('/{link}', [LinkController::class, 'redirect']);
 
 Route::get('/test', function () {
-    // return App::make('url')->to('/');
     return auth()->user();
 });
