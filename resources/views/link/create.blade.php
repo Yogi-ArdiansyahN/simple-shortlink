@@ -19,8 +19,8 @@
 
                 <div class="mb-3">
                     <label class="form-label">Link original</label>
-                    <input name="original" type="text" class="form-control" placeholder="www.link-panjang-pisan.com"
-                        required>
+                    <input name="original" type="text" class="form-control"
+                        placeholder="www.link-panjang-pisan.com/embel-embel-nu-matak-wegah-ngetik-manual/dlsb" required>
                 </div>
 
                 <div class="mb-3">
