@@ -7,6 +7,13 @@ use App\Http\Controllers\AuthController;
 
 
 Route::group(['middleware' => 'auth'], function () {
+    // Route::get('/', function () {
+    //     return view('welcome');
+    // });
+
+    Route::get('/', [LinkController::class, 'index']);
+
+
     Route::prefix('link')->group(function () {
         Route::get('/', [LinkController::class, 'index']);
         Route::get('create', [LinkController::class, 'create']);

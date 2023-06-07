@@ -23,6 +23,10 @@
 
 <body class="antialiased">
 
+    @if (auth()->user())
+        @include('component.navbar')
+    @endif
+
     <div class="container pt-3">
         @yield('content')
     </div>
