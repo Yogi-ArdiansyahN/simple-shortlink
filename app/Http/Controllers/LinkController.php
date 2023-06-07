@@ -11,7 +11,7 @@ class LinkController extends Controller
 {
     function index()
     {
-        // $listLink = Link::whe('user_id', auth()->user()->id)->get();
+        // $listLink = Link::where('user_id', auth()->user()->id)->get();
 
         $listLink = Link::all();
         $baseUrl = App::make('url')->to('/');
