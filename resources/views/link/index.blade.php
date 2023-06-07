@@ -1,20 +1,27 @@
 @php
-    $linkKosong = sizeof($listLink) < 1;
-@endphp
+	$linkKosong = sizeof($listLink) < 1; 
+@endphp 
 
-@extends('layout.main')
-@section('content')
+@extends('layout.main') @section('content') <div class="mx-auto col-md-8">
+    <div class="d-flex justify-content-between align-items-center my-3">
+        <span class="fw-bold">
+            <h1>{{ $title }}</h1>
+        </span>
+        <span>
+            <a href="/link/create" class="btn btn-success btn-sm">+ Shortlink baru</a>
 
-    <div class="mx-auto col-md-8">
-        <div class="d-flex justify-content-between align-items-center my-3">
-            <span class="fw-bold">
-                <h1>{{ $title }}</h1>
-            </span>
-            <span>
-                <a href="/link/create" class="btn btn-success btn-sm">+ Shortlink baru</a>
+        </span>
+    </div>
 
-            </span>
-        </div>
+    @if (session()->has('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+    @elseif(session()->has('error'))
+    <div class="alert alert-danger " role="alert">
+        {{ session('error') }}
+    </div>
+    @endif
 
         <div class="card">
             <table class="table table-hover table-borderless">
@@ -59,29 +66,33 @@
                                         <i class="bi bi-eye-fill"></i>
                                     </a>
 
-                                    {{-- edit --}}
-                                    <a href="/link/edit/{{ $link->id }}" class="btn btn-sm btn-warning">
-                                        <i class="bi bi-pencil-fill"></i>
-                                    </a>
 
-                                    {{-- hapus --}}
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>
+									{{-- edit --}}
+									<a href="/link/edit/{{ $link->id }}" class="btn btn-sm btn-warning">
+										<i class="bi bi-pencil-fill"></i>
+									</a>
 
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endif
+									{{-- hapus --}}
+									<form action="link/delete/{{ $link->id }}" method="post" class="d-inline">
+										@csrf
+										<button class="btn btn-sm btn-danger" type="submit">
+											<i class="bi bi-trash-fill"></i>
+										</button>
+									</form>
 
-                    <tr>
-                        <td colspan="5">
-                            <a href="/link/create" class="btn btn-success btn-sm d-block">+ Shortlink baru</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+								</td>
+							</tr>
+                @endforeach
+                @endif
+
+                <tr>
+                    <td colspan="5">
+                        <a href="/link/create" class="btn btn-success btn-sm d-block">+ Shortlink baru</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     </div>
 
     <script>
@@ -100,4 +111,4 @@
     </script>
 
 
-@endsection
+    @endsection

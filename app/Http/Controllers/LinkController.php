@@ -54,7 +54,6 @@ class LinkController extends Controller
         if (!$insert) {
             return "Gagal buat link baru";
         }
-
         return redirect('/link');
     }
 
@@ -65,5 +64,66 @@ class LinkController extends Controller
         $originalLink = $link->original;
 
         return redirect()->away($originalLink);
+    }
+
+    function edit($link)
+    {
+        $baseUrl = App::make('url')->to('/');
+        $pageData = [
+            'title' => "Edit Link",
+            'link' => Link::find($link),
+            "baseUrl" => $baseUrl,
+        ];
+        return view('link.edit', $pageData);
+    }
+
+    function updateLink(Request $request, $link)
+    {
+        $validate = $request->validate([
+            'original' => 'unique:link',
+            'short' => 'unique:link'
+        ]);
+
+        $data = Link::find($link);
+
+        if ($validate['original'] === $data->original) {
+            if ($validate['short'] === $data->short) {
+                return back();
+            } else {
+                // update shortlink
+                // dd($validate);
+                Link::where('id', $link)->update(['short' => $validate['short']]);
+                return redirect('/')->with('success', 'Berhasil Edit Short Link');
+            }
+        } else {
+            if ($validate['short'] === $data->short) {
+                // update original link
+                Link::where('id', $link)->update(['original' => $validate['original']]);
+                return redirect('/')->with('success', 'Berhasil Edit Original Link');
+            } else {
+                // update shortlink and original link
+                Link::where('id', $link)->update(['short' => $validate['short'], 'original' => $validate['original']]);
+                return redirect('/')->with('success', 'Berhasil Edit Link');
+            }
+        }
+    }
+
+    function show($link)
+    {
+        $link = Link::find($link);
+
+        $pageData = [
+            "title" => "Detail Link",
+            "link" => $link,
+
+        ];
+        // dd($listLink);
+        return view('link.show', $pageData);
+    }
+
+    function destroyLink($link)
+    {
+        Link::destroy($link);
+        return back();
     }
 }
