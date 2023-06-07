@@ -6,20 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrasi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 </head>
 
 <body>
     <div style="height:100%; display:flex; align-items:center; justify-content:center; padding-top:20px;">
         @if (session()->has('success'))
-        <div class="alert alert-success col-lg-10" role="alert">
-            {{ session('success') }}
-        </div>
+            <div class="alert alert-success col-lg-10" role="alert">
+                {{ session('success') }}
+            </div>
         @elseif(session()->has('error'))
-        <div class="alert alert-danger col-lg-10" role="alert">
-            {{ session('error') }}
-        </div>
+            <div class="alert alert-danger col-lg-10" role="alert">
+                {{ session('error') }}
+            </div>
         @endif
         <div class="card" style="width:380px; height:550px; padding:20px;">
             <div class="card-body">
@@ -32,7 +35,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email </label>
-                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -44,8 +48,8 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <p class="mt-4 text-sm text-center">
-                        Belum Punya Akun?
-                        <a href="/daftar" class="text-primary text-gradient font-weight-bold">Registrasi</a>
+                        Sudah Punya Akun?
+                        <a href="/login" class="text-primary text-gradient font-weight-bold">Login</a>
                     </p>
                 </form>
             </div>

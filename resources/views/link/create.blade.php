@@ -39,7 +39,7 @@
 
     <script>
         $(document).ready(function() {
-            const baseUrl = "{!! $baseUrl !!}/"
+            const baseUrl = "{!! $baseUrl !!}/to/"
             console.log(baseUrl)
 
             const inputShort = $("#inputShort")

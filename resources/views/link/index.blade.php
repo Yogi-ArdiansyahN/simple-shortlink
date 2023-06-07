@@ -21,7 +21,7 @@
                 <thead class="table-secondary">
                     <tr>
                         <th>#</th>
-                        <th>ID</th>
+                        {{-- <th>ID</th> --}}
                         <th>Short link</th>
                         {{-- <th>Link original</th> --}}
                         <th class="text-center">Opsi</th>
@@ -31,19 +31,21 @@
                 <tbody>
                     @if ($linkKosong)
                         <tr>
-                            <td colspan="5" class="text-center text-muted">Belum ada link</td>
+                            <td colspan="5" class="text-center text-muted">
+                                <small>You belum punya link mz</small>
+                            </td>
                         </tr>
                     @else
                         @foreach ($listLink as $link)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $link->id }}</td>
+                                {{-- <td>{{ $link->id }}</td> --}}
                                 <td>{{ $link->short }}</td>
                                 {{-- <td>{{ $link->original }}</td> --}}
                                 <td class="text-center">
 
                                     {{-- go to link --}}
-                                    <a href="/{{ $link->short }}" class="btn btn-sm btn-success">
+                                    <a href="/to/{{ $link->short }}" class="btn btn-sm btn-success">
                                         Go
                                     </a>
 
@@ -89,7 +91,7 @@
 
             $(btnCopy).click(function() {
                 let shortLink = $(this).data('shortlink');
-                shortLink = `${baseUrl}/${shortLink}`
+                shortLink = `${baseUrl}/to/${shortLink}`
                 navigator.clipboard.writeText(shortLink);
                 alert('Shortlink berhasil di copy!')
             })

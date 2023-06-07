@@ -11,9 +11,9 @@ class LinkController extends Controller
 {
     function index()
     {
-        // $listLink = Link::where('user_id', auth()->user()->id)->get();
+        $listLink = Link::where('user_id', auth()->user()->id)->get();
 
-        $listLink = Link::all();
+        // $listLink = Link::all();
         $baseUrl = App::make('url')->to('/');
 
         $pageData = [
@@ -41,9 +41,7 @@ class LinkController extends Controller
 
     function store(Request $request)
     {
-        // $userId = auth()->user()->id;
-        $userId = 1;
-
+        $userId = auth()->user()->id;
 
         $linkBaru = $request->validate([
             'original' => 'required|unique:links',

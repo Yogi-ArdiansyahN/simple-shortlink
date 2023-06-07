@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LinkController;
 
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\Controller;
 
 Route::group(['middleware' => 'auth'], function () {
     // Route::get('/', function () {
@@ -12,6 +12,7 @@ Route::group(['middleware' => 'auth'], function () {
     // });
 
     Route::get('/', [LinkController::class, 'index']);
+    Route::get("/me", [Controller::class, 'profil']);
 
 
     Route::prefix('link')->group(function () {
@@ -25,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/{link}', [LinkController::class, 'delete']);
     });
 
-    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 
@@ -45,4 +46,4 @@ Route::get('/test', function () {
 });
 
 // redirect user/guest ke link original via shortlink
-Route::get('/{shortLink}', [LinkController::class, 'redirect']);
+Route::get('/to/{shortLink}', [LinkController::class, 'redirect']);
