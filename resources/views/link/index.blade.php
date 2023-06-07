@@ -8,16 +8,18 @@ $linkKosong = sizeof($listLink) < 1; @endphp @extends('layout.main') @section('c
             <a href="/link/create" class="btn btn-success btn-sm">+ Shortlink baru</a>
 
         </span>
-        @if (session()->has('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
-        @elseif(session()->has('error'))
-        <div class="alert alert-danger " role="alert">
-            {{ session('error') }}
-        </div>
-        @endif
+
     </div>
+
+    @if (session()->has('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+    @elseif(session()->has('error'))
+    <div class="alert alert-danger " role="alert">
+        {{ session('error') }}
+    </div>
+    @endif
 
     <div class="card">
         <table class="table table-hover table-borderless">

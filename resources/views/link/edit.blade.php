@@ -11,11 +11,12 @@
      </div>
 
      <div class="card border-0" style="width:380px; height:400px; padding:20px;">
-         <form action="/{{$link->id}}" method="put">
+         <form action="{{$link->id}}" method="post">
+             @method('POST')
              @csrf
              <div class="mb-3">
                  <label for="" class="form-label">Link Original</label>
-                 <input value="{{ $link->original }}" type="text" name="original" class="form-control" id="" aria-describedby="">
+                 <input value="{{ $link->original }}" type="text" name="original" class="form-control" id="">
              </div>
              <div class="mb-3">
                  <label for="" class="form-label">Shorted Link</label>

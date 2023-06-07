@@ -54,7 +54,7 @@ class LinkController extends Controller
             return "Gagal buat link baru";
         }
 
-        return "Berhasil buat link";
+        // return "Berhasil buat link";
 
         return redirect('/link');
     }
@@ -70,20 +70,36 @@ class LinkController extends Controller
         return view('link.edit', $pageData);
     }
 
-    // function updateLink(Request $request, $link)
-    // {
-    //     $validate = $request->validate([
-    //         'original' => 'unique:link',
-    //         'short' => 'unique:link'
-    //     ]);
+    function updateLink(Request $request, $link)
+    {
+        $validate = $request->validate([
+            'original' => 'unique:link',
+            'short' => 'unique:link'
+        ]);
 
-    //     if (!$validate) {
-    //         return redirect('/link');
-    //     } else {
-    //         Link::where('id', $link)->update($validate);
-    //         return redirect('/link')->with('success', 'Link Berhasil Di Edit');
-    //     }
-    // }
+        $data = Link::find($link);
+
+        if ($validate['original'] === $data->original) {
+            if ($validate['short'] === $data->short) {
+                return back();
+            } else {
+                // update shortlink
+                // dd($validate);
+                Link::where('id', $link)->update(['short' => $validate['short']]);
+                return redirect('/')->with('success', 'Berhasil Edit Short Link');
+            }
+        } else {
+            if ($validate['short'] === $data->short) {
+                // update original link
+                Link::where('id', $link)->update(['original' => $validate['original']]);
+                return redirect('/')->with('success', 'Berhasil Edit Original Link');
+            } else {
+                // update shortlink and original link
+                Link::where('id', $link)->update(['short' => $validate['short'], 'original' => $validate['original']]);
+                return redirect('/')->with('success', 'Berhasil Edit Link');
+            }
+        }
+    }
 
     function show($link)
     {

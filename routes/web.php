@@ -13,11 +13,11 @@ Route::prefix('link')->group(function () {
     Route::get('/', [LinkController::class, 'index']);
     Route::get('create', [LinkController::class, 'create']);
     Route::get('edit/{link}', [LinkController::class, 'edit']);
+    Route::get('/{link}', [LinkController::class, 'show']);
 
     Route::post('/', [LinkController::class, 'store']);
-    Route::put('/{link}', [LinkController::class, 'updateLink']);
+    Route::post('edit/{link}', [LinkController::class, 'updateLink']);
     Route::post('delete/{link}', [LinkController::class, 'destroyLink']);
-    Route::get('/{link}', [LinkController::class, 'show']);
 });
 
 Route::post('/logout', [LoginController::class, 'logout']);
