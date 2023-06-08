@@ -6,6 +6,7 @@ use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\FlareClient\Http\Exceptions\NotFound;
 
 class LinkController extends Controller
 {
@@ -52,14 +53,21 @@ class LinkController extends Controller
         $insert = Link::create($linkBaru);
 
         if (!$insert) {
-            return "Gagal buat link baru";
+            return redirect('/')->with('error', 'Gagal membuat shortlink');
         }
-        return redirect('/link');
+        return redirect('/')->with('success', 'Shortlink berhasil dibuat');
     }
 
     function redirect($shortLink)
     {
         $link = Link::where('short', $shortLink)->first();
+
+        if (!$link) {
+            return redirect('/')->with('error', 'Link tidak ditemukan');
+        }
+
+        $link->visit = $link->visit + 1;
+        $link->save();
 
         $originalLink = $link->original;
 
@@ -77,35 +85,36 @@ class LinkController extends Controller
         return view('link.edit', $pageData);
     }
 
-    function updateLink(Request $request, $link)
+    function update(Request $request, Link $link)
     {
+
+
         $validate = $request->validate([
-            'original' => 'unique:link',
-            'short' => 'unique:link'
+            'original' => 'required',
+            'short' => 'required'
         ]);
 
-        $data = Link::find($link);
+        $sameOriginalLink =  $validate['original'] === $link->original;
+        $sameShortLink =  $validate['short'] === $link->short;
+        $noChanges = $sameOriginalLink && $sameShortLink;
+        $allChanged = !$sameOriginalLink && !$sameShortLink;
 
-        if ($validate['original'] === $data->original) {
-            if ($validate['short'] === $data->short) {
-                return back();
-            } else {
-                // update shortlink
-                // dd($validate);
-                Link::where('id', $link)->update(['short' => $validate['short']]);
-                return redirect('/')->with('success', 'Berhasil Edit Short Link');
-            }
-        } else {
-            if ($validate['short'] === $data->short) {
-                // update original link
-                Link::where('id', $link)->update(['original' => $validate['original']]);
-                return redirect('/')->with('success', 'Berhasil Edit Original Link');
-            } else {
-                // update shortlink and original link
-                Link::where('id', $link)->update(['short' => $validate['short'], 'original' => $validate['original']]);
-                return redirect('/')->with('success', 'Berhasil Edit Link');
-            }
+        if ($noChanges) {
+            return back()->with('warning', 'Tidak ada perubahan disimpan');
         }
+
+        if ($allChanged) {
+            Link::where('id', $link)->update(['short' => $validate['short'], 'original' => $validate['original']]);
+            return redirect('/')->with('success', 'Berhasil Edit Link');
+        }
+
+        if (!$sameOriginalLink) {
+            Link::where('id', $link)->update(['original' => $validate['original']]);
+            return redirect('/')->with('success', 'Berhasil Edit Original Link');
+        }
+
+        Link::where('id', $link)->update(['short' => $validate['short']]);
+        return redirect('/')->with('success', 'Berhasil Edit Short Link');
     }
 
     function show($link)

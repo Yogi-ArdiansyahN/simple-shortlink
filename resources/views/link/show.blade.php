@@ -11,36 +11,37 @@
             </span>
 
             <div>
-                <a href="/link/edit/{{ $link->id }}" class="btn btn-sm btn-warning">Edit link</a>
+                <button class="btn btn-sm btn-danger">Hapus</button>
+                <a href="/link/edit/{{ $link->id }}" class="btn btn-sm btn-warning">Edit</a>
                 @include('component.backButton')
             </div>
         </div>
 
         <div class="card p-3 d-flex flex-row">
             <div id="detailList" class="col-md-10">
-                <div class="d-flex justify-content-between px-3">
-                    <span class="fw-bold">ID</span>
+                <div class="d-flex justify-content-between p-3">
+                    <span class="fw-bold col-md-2">ID</span>
                     <span>{{ $link->id }}</span>
                 </div>
 
 
-                <div class="d-flex justify-content-between px-3">
-                    <span class="fw-bold">Shortlink</span>
+                <div class="d-flex justify-content-between p-3">
+                    <span class="fw-bold col-md-2">Shortlink</span>
                     <span>{{ $shortLink }}</span>
                 </div>
 
-                <div class="d-flex justify-content-between px-3">
-                    <span class="fw-bold">Original link</span>
+                <div class="d-flex justify-content-between p-3">
+                    <span class="fw-bold col-md-2">Original link</span>
                     <span>{{ $link->original }}</span>
                 </div>
 
-                <div class="d-flex justify-content-between px-3">
-                    <span class="fw-bold">Created at</span>
+                <div class="d-flex justify-content-between p-3">
+                    <span class="fw-bold col-md-2">Created at</span>
                     <span>{{ $link->created_at }}</span>
                 </div>
 
-                <div class="d-flex justify-content-between px-3">
-                    <span class="fw-bold">Updated at</span>
+                <div class="d-flex justify-content-between p-3">
+                    <span class="fw-bold col-md-2">Updated at</span>
                     <span>{{ $link->updated_at }}</span>
                 </div>
             </div>
@@ -56,6 +57,11 @@
     </div>
 
     <style>
+        #detailList {
+            border-radius: .5em;
+            overflow: hidden;
+        }
+
         #detailList> :nth-child(odd) {
             background-color: rgb(224, 224, 224);
         }

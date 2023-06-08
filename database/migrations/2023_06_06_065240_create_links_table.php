@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->unsigned();
             $table->string('original');
             $table->string('short');
+            $table->integer('visit')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
