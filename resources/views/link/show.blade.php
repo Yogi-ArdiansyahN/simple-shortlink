@@ -10,13 +10,14 @@
                 <h1>{{ $title }}</h1>
             </span>
 
-            <span>
+            <div>
+                <a href="/link/edit/{{ $link->id }}" class="btn btn-sm btn-warning">Edit link</a>
                 @include('component.backButton')
-            </span>
+            </div>
         </div>
 
         <div class="card p-3 d-flex flex-row">
-            <div id="detailList" class="col-md-8">
+            <div id="detailList" class="col-md-10">
                 <div class="d-flex justify-content-between px-3">
                     <span class="fw-bold">ID</span>
                     <span>{{ $link->id }}</span>
@@ -44,10 +45,12 @@
                 </div>
             </div>
 
-            <div id="visitCount" class="d-flex flex-column justify-content-center align-items-center  w-100">
+            <div id="visitCount" class="d-flex flex-column justify-content-start align-items-center w-100">
                 <span>Visitor</span>
                 {{-- <span class="display-1">[$link->visit]</span> --}}
-                <span>[$link->visit]</span>
+                <div class="h-100 d-flex justify-content-center align-items-center">
+                    <span>[$link->visit]</span>
+                </div>
             </div>
         </div>
     </div>
