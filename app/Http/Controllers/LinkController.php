@@ -115,6 +115,8 @@ class LinkController extends Controller
         $pageData = [
             "title" => "Detail Link",
             "link" => $link,
+            "baseUrl" => App::make('url')->to('/'),
+
 
         ];
         // dd($listLink);

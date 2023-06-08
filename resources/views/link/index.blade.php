@@ -1,36 +1,30 @@
 @php
-	$linkKosong = sizeof($listLink) < 1; 
-@endphp 
+    $linkKosong = sizeof($listLink) < 1;
+@endphp
 
-@extends('layout.main') @section('content') <div class="mx-auto col-md-8">
-    <div class="d-flex justify-content-between align-items-center my-3">
-        <span class="fw-bold">
-            <h1>{{ $title }}</h1>
-        </span>
-        <span>
-            <a href="/link/create" class="btn btn-success btn-sm">+ Shortlink baru</a>
+@extends('layout.main')
+@section('content')
 
-        </span>
-    </div>
+    <div class="mx-auto col-md-8">
 
-    @if (session()->has('success'))
-    <div class="alert alert-success" role="alert">
-        {{ session('success') }}
-    </div>
-    @elseif(session()->has('error'))
-    <div class="alert alert-danger " role="alert">
-        {{ session('error') }}
-    </div>
-    @endif
+        <div class="d-flex justify-content-between align-items-center my-3">
+            <span class="fw-bold">
+                <h1>{{ $title }}</h1>
+            </span>
+            <span>
+                <a href="/link/create" class="btn btn-success btn-sm">+ Shortlink baru</a>
+
+            </span>
+        </div>
+
+
 
         <div class="card">
             <table class="table table-hover table-borderless">
                 <thead class="table-secondary">
                     <tr>
                         <th>#</th>
-                        {{-- <th>ID</th> --}}
                         <th>Short link</th>
-                        {{-- <th>Link original</th> --}}
                         <th class="text-center">Opsi</th>
                     </tr>
                 </thead>
@@ -46,9 +40,7 @@
                         @foreach ($listLink as $link)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                {{-- <td>{{ $link->id }}</td> --}}
                                 <td>{{ $link->short }}</td>
-                                {{-- <td>{{ $link->original }}</td> --}}
                                 <td class="text-center">
 
                                     {{-- go to link --}}
@@ -67,32 +59,32 @@
                                     </a>
 
 
-									{{-- edit --}}
-									<a href="/link/edit/{{ $link->id }}" class="btn btn-sm btn-warning">
-										<i class="bi bi-pencil-fill"></i>
-									</a>
+                                    {{-- edit --}}
+                                    <a href="/link/edit/{{ $link->id }}" class="btn btn-sm btn-warning">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
 
-									{{-- hapus --}}
-									<form action="link/delete/{{ $link->id }}" method="post" class="d-inline">
-										@csrf
-										<button class="btn btn-sm btn-danger" type="submit">
-											<i class="bi bi-trash-fill"></i>
-										</button>
-									</form>
+                                    {{-- hapus --}}
+                                    <form action="link/delete/{{ $link->id }}" method="post" class="d-inline">
+                                        @csrf
+                                        <button class="btn btn-sm btn-danger" type="submit">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
 
-								</td>
-							</tr>
-                @endforeach
-                @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
 
-                <tr>
-                    <td colspan="5">
-                        <a href="/link/create" class="btn btn-success btn-sm d-block">+ Shortlink baru</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                    <tr>
+                        <td colspan="5">
+                            <a href="/link/create" class="btn btn-success btn-sm d-block">+ Shortlink baru</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
@@ -111,4 +103,4 @@
     </script>
 
 
-    @endsection
+@endsection

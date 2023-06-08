@@ -23,11 +23,15 @@
 
 <body class="antialiased">
 
-    @if (auth()->user())
+    @auth
         @include('component.navbar')
-    @endif
+    @endauth
 
-    <div class="container pt-3">
+
+    <div class="container">
+        @auth
+            @include('component.resultNotification')
+        @endauth
         @yield('content')
     </div>
 
