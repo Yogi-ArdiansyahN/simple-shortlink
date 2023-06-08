@@ -1,6 +1,7 @@
 @extends('layout.main')
 @section('content')
     <div style="min-height:100vh; display:flex; align-items:center; justify-content:center;">
+        @include('component.resultNotification')
 
         <div class="card" style="width:380px; height:550px; padding:20px;">
             <div class="card-body">

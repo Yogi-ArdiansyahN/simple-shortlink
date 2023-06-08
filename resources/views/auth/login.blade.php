@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('content')
-    <div style="min-height:100vh; display:flex; align-items:center; justify-content:center;">
+    <div class="flex-column" style="min-height:100vh; display:flex; align-items:center; justify-content:center;">
         @include('component.resultNotification')
 
         <div class="card" style="width:380px; height:400px; padding:20px;">

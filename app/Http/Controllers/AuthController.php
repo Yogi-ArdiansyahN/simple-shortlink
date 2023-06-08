@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,10 +49,11 @@ class AuthController extends Controller
 
         $validate['password'] = Hash::make($validate['password']);
 
+
         try {
             User::create($validate);
             return redirect('/login')->with('success', 'Registrasi Berhasil Silahkan Login!!');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return redirect('/daftar')->with('error', 'Registrasi Gagal, Silahkan Coba Lagi!!');
         }
     }
