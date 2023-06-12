@@ -1,10 +1,10 @@
 @extends('layout.main')
 
 @section('content')
-    <div class="flex-column" style="min-height:100vh; display:flex; align-items:center; justify-content:center;">
-        @include('component.resultNotification')
+    <div class="d-flex flex-column justify-content-center align-items-center" style="min-height:100vh;">
 
-        <div class="card" style="width:380px; height:400px; padding:20px;">
+        @include('component.resultNotification')
+        <div class="card col-4 p-5">
             <div class="card-body">
                 <h1 class="card-title text-center pb-3">Login</h1>
                 <form action="/login" method="post">

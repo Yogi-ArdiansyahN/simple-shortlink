@@ -21,12 +21,10 @@
 
 </head>
 
-<body class="antialiased">
-
+<body class="antialiased bg-light">
     @auth
         @include('component.navbar')
     @endauth
-
 
     <div class="container">
         @auth

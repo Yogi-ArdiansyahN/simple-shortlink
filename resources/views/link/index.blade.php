@@ -19,71 +19,75 @@
 
 
 
-        <div class="card">
-            <table class="table table-hover table-borderless">
-                <thead class="table-secondary">
-                    <tr>
-                        <th>#</th>
-                        <th>Short link</th>
-                        <th class="text-center">Opsi</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @if ($linkKosong)
+        <div class="card p-3">
+            <div class="rounded overflow-hidden">
+                <table class="table table-borderless table-striped">
+                    <thead class="table-secondary">
                         <tr>
-                            <td colspan="5" class="text-center text-muted">
-                                <small>You belum punya link mz</small>
-                            </td>
+                            <th class="text-center">#</th>
+                            <th>Short link</th>
+                            <th class="text-center">Opsi</th>
                         </tr>
-                    @else
-                        @foreach ($listLink as $link)
+                    </thead>
+
+                    <tbody>
+                        @if ($linkKosong)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $link->short }}</td>
-                                <td class="text-center">
-
-                                    {{-- go to link --}}
-                                    <a href="/to/{{ $link->short }}" class="btn btn-sm btn-success">
-                                        Go
-                                    </a>
-
-                                    {{-- copy ke clipboard --}}
-                                    <button class="btn btn-sm btn-dark btnCopy" data-shortlink="{{ $link->short }}">
-                                        <i class="bi bi-clipboard-fill"></i>
-                                    </button>
-
-                                    {{-- lihat detail --}}
-                                    <a href="/link/{{ $link->id }}" class="btn btn-sm btn-primary">
-                                        <i class="bi bi-eye-fill"></i>
-                                    </a>
-
-
-                                    {{-- edit --}}
-                                    <a href="/link/edit/{{ $link->id }}" class="btn btn-sm btn-warning">
-                                        <i class="bi bi-pencil-fill"></i>
-                                    </a>
-
-                                    {{-- hapus --}}
-                                    <form action="link/delete/{{ $link->id }}" method="post" class="d-inline">
-                                        @csrf
-                                        <button class="btn btn-sm btn-danger" type="submit">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
-                                    </form>
-
+                                <td colspan="5" class="text-center text-muted">
+                                    <small>You belum punya link mz</small>
                                 </td>
                             </tr>
-                        @endforeach
-                    @endif
+                        @else
+                            @foreach ($listLink as $link)
+                                <tr>
+                                    <th class="text-center">{{ $loop->iteration }}</th>
+                                    <td>{{ $link->short }}</td>
+                                    <td class="text-center">
 
-                    <tr>
-                        <td colspan="5">
-                            <a href="/link/create" class="btn btn-success btn-sm d-block">+ Shortlink baru</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                                        {{-- go to link --}}
+                                        <a href="/to/{{ $link->short }}" class="btn btn-sm btn-success">
+                                            Go
+                                        </a>
+
+                                        {{-- copy ke clipboard --}}
+                                        <button class="btn btn-sm btn-dark btnCopy" data-shortlink="{{ $link->short }}">
+                                            <i class="bi bi-clipboard-fill"></i>
+                                        </button>
+
+                                        {{-- lihat detail --}}
+                                        <a href="/link/{{ $link->id }}" class="btn btn-sm btn-primary">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+
+
+                                        {{-- edit --}}
+                                        <a href="/link/edit/{{ $link->id }}" class="btn btn-sm btn-warning">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+
+                                        {{-- hapus --}}
+                                        <form action="link/delete/{{ $link->id }}" method="post" class="d-inline">
+                                            @csrf
+                                            <button class="btn btn-sm btn-danger" type="submit">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </form>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+
+                        <tr>
+                            <td colspan="5">
+                                <a href="/link/create" class="btn btn-success btn-sm d-block">+ Shortlink baru</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
         </div>
     </div>
 

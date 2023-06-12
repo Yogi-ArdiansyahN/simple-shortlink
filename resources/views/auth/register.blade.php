@@ -3,7 +3,7 @@
     <div style="min-height:100vh; display:flex; align-items:center; justify-content:center;">
         @include('component.resultNotification')
 
-        <div class="card" style="width:380px; height:550px; padding:20px;">
+        <div class="card col-4 p-5">
             <div class="card-body">
                 <h1 class="card-title text-center pb-3">Registrasi</h1>
                 <form action="/daftar" method="post">

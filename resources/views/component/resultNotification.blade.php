@@ -18,11 +18,9 @@
 <div class="my-3">
     @foreach ($sessionMessages as $sm)
         @if (session()->has($sm['name']))
-            <div class="mx-auto">
-                <div class="alert alert-{{ $sm['color'] }} d-flex justify-content-between" role="alert">
-                    <span>{{ session($sm['name']) }}</span>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+            <div class="alert alert-{{ $sm['color'] }} d-flex justify-content-between w-100 mx-auto" role="alert">
+                <span>{{ session($sm['name']) }}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
     @endforeach
