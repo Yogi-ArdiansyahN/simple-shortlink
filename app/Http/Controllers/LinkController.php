@@ -13,8 +13,6 @@ class LinkController extends Controller
     function index()
     {
         $listLink = Link::where('user_id', auth()->user()->id)->get();
-
-        // $listLink = Link::all();
         $baseUrl = App::make('url')->to('/');
 
         $pageData = [
@@ -132,9 +130,9 @@ class LinkController extends Controller
         return view('link.show', $pageData);
     }
 
-    function destroyLink($link)
+    function destroy($link)
     {
         Link::destroy($link);
-        return back();
+        return redirect('/')->with('success', 'shortlink berhasil dihapus!');
     }
 }

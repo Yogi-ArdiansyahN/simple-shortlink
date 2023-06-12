@@ -9,17 +9,17 @@ use App\Http\Controllers\Controller;
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [LinkController::class, 'index']);
 
-	Route::get("/me", [Controller::class, 'profil']);
+    Route::get("/me", [Controller::class, 'profil']);
 
     Route::prefix('link')->group(function () {
         Route::get('/', [LinkController::class, 'index']);
         Route::get('create', [LinkController::class, 'create']);
-		Route::get('edit/{link}', [LinkController::class, 'edit']);
+        Route::get('edit/{link}', [LinkController::class, 'edit']);
         Route::get('/{link}', [LinkController::class, 'show']);
 
         Route::post('/', [LinkController::class, 'store']);
         Route::put('/{link}', [LinkController::class, 'update']);
-        Route::delete('/{link}', [LinkController::class, 'delete']);
+        Route::delete('/{link}', [LinkController::class, 'destroy']);
     });
 
     Route::post('/logout', [AuthController::class, 'logout']);

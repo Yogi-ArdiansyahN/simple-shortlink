@@ -54,11 +54,10 @@
             <div class="col ps-3">
                 <div class="col card p-3 d-flex flex-column align-items-center justify-content start">
                     <span class="text-muted">Visitor</span>
-                    <span class="">400</span>
+                    <span class="">{{ $link->visit }}</span>
                 </div>
             </div>
         </div>
-
 
     </div>
 

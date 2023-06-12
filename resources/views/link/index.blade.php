@@ -17,7 +17,10 @@
             </span>
         </div>
 
-
+        <div id="alertCopy" class="d-none alert alert-success justify-content-between w-100 mx-auto" role="alert">
+            <span>Shortlink berhasil dicopy</span>
+            <button type="button" class="btn-close" id="btnCloseCopyAlert" aria-label="Close"></button>
+        </div>
 
         <div class="card p-3">
             <div class="rounded overflow-hidden">
@@ -59,19 +62,17 @@
                                             <i class="bi bi-eye-fill"></i>
                                         </a>
 
-
                                         {{-- edit --}}
                                         <a href="/link/edit/{{ $link->id }}" class="btn btn-sm btn-warning">
                                             <i class="bi bi-pencil-fill"></i>
                                         </a>
 
                                         {{-- hapus --}}
-                                        <form action="link/delete/{{ $link->id }}" method="post" class="d-inline">
-                                            @csrf
-                                            <button class="btn btn-sm btn-danger" type="submit">
-                                                <i class="bi bi-trash-fill"></i>
-                                            </button>
-                                        </form>
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#modalDeleteLink-{{ $link->id }}">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                        @include('link.modalDelete')
 
                                     </td>
                                 </tr>
@@ -87,7 +88,6 @@
                 </table>
             </div>
 
-
         </div>
     </div>
 
@@ -95,16 +95,30 @@
         $(document).ready(function() {
             const baseUrl = "{!! $baseUrl !!}"
             const btnCopy = $(".btnCopy")
+            const alertCopy = $("#alertCopy")
+            const btnCloseAlertCopy = $("#btnCloseCopyAlert")
+
+            alertCopy.hide();
+
+            $(btnCloseAlertCopy).click(function() {
+                alertCopy.removeClass('d-flex')
+                alertCopy.addClass('d-none')
+            })
 
             $(btnCopy).click(function() {
                 let shortLink = $(this).data('shortlink');
                 shortLink = `${baseUrl}/to/${shortLink}`
                 navigator.clipboard.writeText(shortLink);
-                alert('Shortlink berhasil di copy!')
+                // alert('Shortlink berhasil di copy!')
+
+                alertCopy.removeClass('d-none')
+                alertCopy.addClass('d-flex')
+
+                $(alertCopy).show();
+
             })
 
         })
     </script>
-
 
 @endsection
