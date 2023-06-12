@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,9 @@ class AuthController extends Controller
 {
     public function login()
     {
-        return view('auth.login');
+        return view('auth.login', [
+            'title' => "Login"
+        ]);
     }
 
     public function authLogin(Request $request)
@@ -30,7 +33,9 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('auth.register');
+        return view('auth.register', [
+            'title' => "Register"
+        ]);
     }
 
     public function authRegister(Request $request)
@@ -44,15 +49,20 @@ class AuthController extends Controller
 
         $validate['password'] = Hash::make($validate['password']);
 
+
         try {
             User::create($validate);
             return redirect('/login')->with('success', 'Registrasi Berhasil Silahkan Login!!');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return redirect('/daftar')->with('error', 'Registrasi Gagal, Silahkan Coba Lagi!!');
         }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }
